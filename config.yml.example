@@ -1,0 +1,14 @@
+audit_file: /tmp/vault.log
+unseal_key_prefix: unseal-key
+root_token_key: root-token
+threshold: 5
+shares: 3
+adapter: s3
+vault:
+  address: http://localhost:8200
+kms:
+  region: us-east-1
+  cmk1: cmk-uuid
+s3:
+  region: us-east-1
+  bucket: my-secure-vault-bucket

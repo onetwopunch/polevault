@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require "polevault"
+require 'thor'
+
+class CLI < Thor
+  option :config, required: true, type: :string, default: 'config.yml'
+  desc "bootstrap", "Initializes and bootstraps a Vault node."
+  long_desc "This MUST be run on a highly secure and trusted node since it must have at least write access to the KV store where the root token and all unseal shards are stored. Maybe think about running this manually as a root user."
+  def bootstrap
+    Polevault::Command.new(config: options[:config]).bootstrap
+  end
+
+  option :config, required: true, type: :string, default: 'config.yml'
+  desc "unseal SHARD", "Run on an unseal node, this will submit one unseal key."
+  def unseal(shard = 1)
+    Polevault::Command.new(config: options[:config]).try_unseal(shard)
+  end
+
+  option :config, required: true, type: :string, default: 'config.yml'
+  desc "generate-migration NAME", "Generates migration file in the specified directory"
+  long_desc "Name must be in snake_case"
+  def generate_migration(name)
+    file =Polevault::Migrator.new(config: options[:config]).generate_migration(name)
+    puts "Migration template written to #{file}"
+  end
+end
+CLI.start(ARGV)

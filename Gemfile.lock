@@ -1,0 +1,54 @@
+PATH
+  remote: .
+  specs:
+    polevault (0.1.0)
+      aws-sdk (~> 2)
+      figly (~> 1.1)
+      thor
+      vault (~> 0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-sdk (2.7.3)
+      aws-sdk-resources (= 2.7.3)
+    aws-sdk-core (2.7.3)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.7.3)
+      aws-sdk-core (= 2.7.3)
+    aws-sigv4 (1.0.0)
+    blankslate (2.1.2.4)
+    byebug (9.0.6)
+    coderay (1.1.1)
+    figly (1.1.0)
+      toml
+    jmespath (1.3.1)
+    method_source (0.8.2)
+    minitest (5.10.1)
+    parslet (1.5.0)
+      blankslate (~> 2.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rake (10.5.0)
+    slop (3.6.0)
+    thor (0.19.4)
+    toml (0.1.2)
+      parslet (~> 1.5.0)
+    vault (0.7.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.13)
+  byebug
+  minitest (~> 5.0)
+  polevault!
+  pry
+  rake (~> 10.0)
+
+BUNDLED WITH
+   1.13.6

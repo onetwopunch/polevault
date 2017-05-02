@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+
+require "bundler/setup"
+require "polevault"
+require "pry"
+require_relative '../test/lib/docker_vault'
+
+DockerVault.run
+Pry.config.prompt = lambda do |context, nesting, pry|
+  "[polevault] #{context}> "
+end
+
+Pry.hooks.add_hook(:when_started, "notice") do |output, bind, pry|
+  puts "A docker vault instance has started at http://localhost:18200 for the session."
+  puts "You also have access to the `pv` Polevault::Command instance configured with the test config"
+  puts "as well as `v` which is a shortcut to `polvault.client`. To make sure you don't "
+  puts "accidentally store things in a remote KV, the KV is configured as Inmem."
+
+  def pv
+    @polevault ||= Polevault::Command.new(config: './test/fixtures/test_config.yml')
+  end
+
+  def v
+    pv.client
+  end
+end
+
+Pry.start
+
+DockerVault.clean

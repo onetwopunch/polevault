@@ -1,0 +1,10 @@
+audit_file: /tmp/vault.log
+unseal_key_prefix: unseal-key
+root_token_prefix: token
+threshold: 2
+shares: 3
+adapter: inmem
+migrations_path: test/fixtures/migrations
+custom_path: custom
+vault:
+  address: http://localhost:18200
